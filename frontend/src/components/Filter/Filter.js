@@ -11,7 +11,6 @@ import {
 import './Filter.css';
 
 function Filter() {
-  // const titleFilter = useSelector((state) => state.filter.title);
   const titleFilter = useSelector(selectTileFilter);
   const authorFilter = useSelector(selectAuthorFilter);
   const onlyFavoriteFilter = useSelector(selectOnlyFavorite);

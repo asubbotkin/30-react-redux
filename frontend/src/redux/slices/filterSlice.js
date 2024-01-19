@@ -14,6 +14,7 @@ const filterSlice = createSlice({
       return { ...state, title: action.payload };
     },
     setAuthorFilter: (state, action) => {
+      // return (state.author = action.payload);
       return { ...state, author: action.payload };
     },
     setOnlyFavorite: (state) => {
