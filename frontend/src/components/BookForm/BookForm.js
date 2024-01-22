@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
-import { addBook } from '../../redux/slices/booksSlice';
+// import axios from 'axios';
+import { addBook, thunkFunction } from '../../redux/slices/booksSlice';
 import createBookWhithID from '../../utils/createBookWhithID';
 import booksData from '../../data/books.json';
 import './BookForm.css';
@@ -29,16 +29,30 @@ function BookForm() {
     }
   };
 
+  // const thunkFunction = async (dispatch, getState) => {
+  //   console.log(getState());
+  //   try {
+  //     const res = await axios.get('http://localhost:4000/random-book');
+  //     // if (res.data && res.data.title && res.data.author) {
+  //     if (res?.data?.title && res?.data?.author) {
+  //       dispatch(addBook(createBookWhithID(res.data, 'API')));
+  //     }
+  //   } catch (error) {
+  //     console.log('Error fetching random book', error);
+  //   }
+  // };
+
   const handleAddRandomBookViaAPI = async () => {
-    try {
-      const res = await axios.get('http://localhost:4000/random-book');
-      // if (res.data && res.data.title && res.data.author) {
-      if (res?.data?.title && res?.data?.author) {
-        dispatch(addBook(createBookWhithID(res.data, 'API')));
-      }
-    } catch (error) {
-      console.log('Error fetching random book', error);
-    }
+    dispatch(thunkFunction);
+    // try {
+    //   const res = await axios.get('http://localhost:4000/random-book');
+    //   // if (res.data && res.data.title && res.data.author) {
+    //   if (res?.data?.title && res?.data?.author) {
+    //     dispatch(addBook(createBookWhithID(res.data, 'API')));
+    //   }
+    // } catch (error) {
+    //   console.log('Error fetching random book', error);
+    // }
   };
 
   return (
