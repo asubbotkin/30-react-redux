@@ -9,13 +9,13 @@ const errorSlice = createSlice({
     setError: (state, action) => {
       return action.payload;
     },
-    clearErrror: () => {
+    clearError: () => {
       return initialState;
     },
   },
 });
 
-export const { setError, clearErrror } = errorSlice.actions;
+export const { setError, clearError } = errorSlice.actions;
 
 export const selectErrorMessage = (state) => state.error;
 
