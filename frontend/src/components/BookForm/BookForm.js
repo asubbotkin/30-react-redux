@@ -46,7 +46,7 @@ function BookForm() {
   // };
 
   const handleAddRandomBookViaAPI = async () => {
-    dispatch(fetchBook());
+    dispatch(fetchBook('http://localhost:4000/random-book'));
     // try {
     //   const res = await axios.get('http://localhost:4000/random-book');
     //   // if (res.data && res.data.title && res.data.author) {
