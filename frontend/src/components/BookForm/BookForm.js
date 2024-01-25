@@ -1,9 +1,13 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaSpinner } from 'react-icons/fa';
 
 // import axios from 'axios';
-import { addBook, fetchBook } from '../../redux/slices/booksSlice';
+import {
+  addBook,
+  fetchBook,
+  selectIsLoadingViaAPI,
+} from '../../redux/slices/booksSlice';
 import { setError } from '../../redux/slices/errorSlice';
 import createBookWhithID from '../../utils/createBookWhithID';
 import booksData from '../../data/books.json';
@@ -12,8 +16,9 @@ import './BookForm.css';
 function BookForm() {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoadingViaAPI);
 
   const handleAddRandomBook = () => {
     const randomIndex = Math.floor(Math.random() * booksData.length);
@@ -48,23 +53,32 @@ function BookForm() {
   //   }
   // };
 
-  const handleAddRandomBookViaAPI = async () => {
-    try {
-      setIsLoading(true);
-      await dispatch(fetchBook('http://localhost:4000/random-book-delayed'));
-    } finally {
-      setIsLoading(false);
-    }
-    // try {
-    //   const res = await axios.get('http://localhost:4000/random-book');
-    //   // if (res.data && res.data.title && res.data.author) {
-    //   if (res?.data?.title && res?.data?.author) {
-    //     dispatch(addBook(createBookWhithID(res.data, 'API')));
-    //   }
-    // } catch (error) {
-    //   console.log('Error fetching random book', error);
-    // }
+  // Option 3
+  const handleAddRandomBookViaAPI = () => {
+    dispatch(fetchBook('http://localhost:4000/random-book-delayed'));
   };
+
+  // Option2
+  // const handleAddRandomBookViaAPI = async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     await dispatch(fetchBook('http://localhost:4000/random-book-delayed'));
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+  // const handleAddRandomBookViaAPI = async () => {
+  // Option 1
+  // try {
+  //   const res = await axios.get('http://localhost:4000/random-book');
+  //   // if (res.data && res.data.title && res.data.author) {
+  //   if (res?.data?.title && res?.data?.author) {
+  //     dispatch(addBook(createBookWhithID(res.data, 'API')));
+  //   }
+  // } catch (error) {
+  //   console.log('Error fetching random book', error);
+  // }
+  // };
 
   return (
     <div className="app-block book-form">
